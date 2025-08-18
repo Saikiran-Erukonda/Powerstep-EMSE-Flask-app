@@ -1,2 +1,4 @@
-# Powerstep---EMSE-Flask-app
-A flask app designed to manage Employee's attendance and salaries at one place. It will be useful for small-scale industries/ enterprises/ dealers.
+# Powerstep - Flask-app
+## Employee Management App for Small Enterprises 
+
+`main.py` is the file to execute
