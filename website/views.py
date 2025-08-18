@@ -205,9 +205,6 @@ def salary_filter():
     )
 
 #stubs small
-from flask import render_template, request, flash
-from website.models2 import Employee, Salary, EmployeeAttendance, Holiday
-from datetime import date
 import calendar
 
 @views.route('/view_salary/<int:id>', methods=['GET'])
@@ -292,4 +289,5 @@ def mark_paid(id):
         salary.payment_status = 'paid'
         db2.session.commit()
     return redirect(url_for('views.view_salaries'))
+
 
