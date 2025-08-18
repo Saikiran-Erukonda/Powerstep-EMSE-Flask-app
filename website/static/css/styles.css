@@ -1,0 +1,61 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    font-weight: 500;
+}
+
+.badge {
+    font-size: 90%;
+    font-weight: 500;
+    padding: 0.35em 0.65em;
+}
+
+.table th {
+    border-top: none;
+}
+
+.btn-group .btn {
+    margin-right: 5px;
+}
+
+#attendanceChart, #salaryTrendChart {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* Custom colors */
+.bg-primary {
+    background-color: #4e73df !important;
+}
+
+.bg-success {
+    background-color: #1cc88a !important;
+}
+
+.bg-info {
+    background-color: #36b9cc !important;
+}
+
+.bg-warning {
+    background-color: #f6c23e !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 0.75rem;
+    }
+    
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+}

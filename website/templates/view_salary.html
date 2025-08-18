@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Salary Details for {{ emp_name }} - {{ month }} {{ year }}</h2>
+<table class="table table-bordered">
+    <tr><th>Base Salary</th><td>₹{{ base_salary }}</td></tr>
+    <tr><th>Present Days</th><td>{{ present_days }}</td></tr>
+    <tr><th>Leave Days</th><td>{{ leave_days }}</td></tr>
+    <tr><th>Absent Days</th><td>{{ absent_days }}</td></tr>
+    <tr><th>Deductions</th><td>₹{{ deductions }}</td></tr>
+    <tr><th>Net Salary</th><td><strong>₹{{ net_salary }}</strong></td></tr>
+    <tr><th>Payment Details</th><td>{{ payment_details }}</td></tr>
+    <tr><th>Payment Status</th><td>{{ payment_status }}</td></tr>
+</table>
+</br>
+    <div class="d-flex justify-content-center">
+        <a href="{{ pay }}" class="btn btn-info">Pay</a>
+    </div>
+
+
+{% endblock %}

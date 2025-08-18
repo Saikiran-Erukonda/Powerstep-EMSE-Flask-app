@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %} Sign Up {% endblock %}
+{% block content %}
+<form method ="POST">
+    <h2 align = "center">Power Step</h2>
+    <h6 align = "center">Employee Management app for Small Enterprise</h6>
+    <h4 align = "center" >Sign Up </h4>
+    <!--Name of Business-->
+    <div class = "form-group">
+        <label  for = "bname">Business Name</label>
+        <input type = "text" 
+               class ="form-control"
+               id = "bname"
+               name = "bname"
+               placeholder= "Enter Business name"
+        /> 
+    </div>
+
+    <!--Name of Owner-->
+    <div class = "form-group">
+        <label  for = "firstname">Owner Name</label>
+        <input type = "text" 
+               class ="form-control"
+               id = "firstname"
+               name = "firstname"
+               placeholder= "Enter your full name"
+        /> 
+    </div>
+
+    <!--email id-->
+    <div class = "form-group">
+        <label  for = "email">Email Address</label>
+        <input type = "email" 
+               class ="form-control"
+               id = "email"
+               name = "email"
+               placeholder= "Enter email"
+        /> 
+    </div>
+    
+    <!--password 1-->
+    <div class = "form-group">
+        <label  for = "password1"> Password </label>
+        <input type = "password" 
+               class ="form-control"
+               id = "password1"
+               name = "password1"
+               placeholder= "Enter your password (atleast 8 char.)"
+        /> 
+    </div>
+    <!--Confirm password -->
+    <div class = "form-group">
+        <label  for = "password2"> Confirm Password </label>
+        <input type = "password" 
+               class ="form-control"
+               id = "password2"
+               name = "password2"
+               placeholder= "Re-enter your password"
+        /> 
+    </div>
+
+    <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}

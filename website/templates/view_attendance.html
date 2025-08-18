@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Attendance Records</h2>
+<form method="GET" action="{{ url_for('views.view_attendance') }}" class="form-inline mb-4">
+    <label for="start_date">From:</label>
+    <input type="date" id="start_date" name="start_date" class="form-control mx-2"
+           value="{{ request.args.get('start_date', '') }}"/>
+
+    <label for="end_date">To:</label>
+    <input type="date" id="end_date" name="end_date" class="form-control mx-2"
+           value="{{ request.args.get('end_date', '') }}"/>
+
+    <button type="submit" class="btn btn-success">Filter</button>
+</form>
+{% if request.args.get('start_date') and request.args.get('end_date') %}
+    <p><strong>Showing records from {{ request.args.get('start_date') }} to {{ request.args.get('end_date') }}</strong></p>
+{% endif %}
+<p>Total employees found: {{ attendance_data | length }}</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Employee Name</th>
+            <th>Present (in Days)</th>
+            <th>Absent (in Days)</th>
+            <th>Leave (in Days)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in attendance_data %}
+        <tr>
+            <td>{{ data.employee.emp_id }}</td>
+            <td>{{ data.employee.emp_name }}</td>
+            <td>{{ data.present }}</td>
+            <td>{{ data.absent }}</td>
+            <td>{{ data.leave }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in attendance_data %}
+            {% for record in data.attendance %}
+            <tr>
+                <td>{{ data.employee.emp_id }}</td>
+                <td>{{ data.employee.emp_name }}</td>
+                <td>{{ record.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ record.status }}</td>
+                <!--<td>
+                    <form method="POST" action="{{ url_for('views.mark_attendance') }}">
+                        <input type="hidden" name="emp_id" value="{{ data.employee.emp_id }}">
+                        <input type="hidden" name="date" value="{{ record.date.strftime('%Y-%m-%d') }}">
+                        <input type="hidden" name="status" value="change">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>      
+                </td> -->  
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

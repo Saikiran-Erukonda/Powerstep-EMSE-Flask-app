@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Salary Management</h2>
+    <div>
+        <a href="{{ url_for('views.view_salaries', month=current_month, year=current_year) }}" class="btn btn-primary">
+            <i class="fa fa-calculator"></i> Calculate Salary
+        </a>
+
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#salaryFilterModal">
+            <i class="fa fa-filter"></i> Filter
+        </button>
+    </div>
+</div>
+    <h5> {{ month_name }} - {{ current_year }} </h5>
+
+<div class="card">
+    <div class="card-header bg-success text-white">
+        <h4>Salary Records</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover" id="salariesTable">
+                <thead>
+                    <tr>
+                        <th>Month/Year</th>
+                        <th>Employee</th>
+                        <th>Base Salary</th>
+                        <th>Deductions</th>
+                        <th>Bonuses</th>
+                        <th>Net Salary</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for salary in salaries %}
+                    <tr>
+                        <td>{{ salary.month }}/{{ salary.year }}</td>
+                        <td>{{ salary.employee.emp_name }}</td>
+                        <td>{{ "${:,.2f}".format(salary.base_salary or 0) }}</td>
+                        <td class="text-danger">-{{ "${:,.2f}".format(salary.deductions or 0) }}</td>
+                        <td class="text-success">+{{ "${:,.2f}".format(salary.bonuses or 0) }}</td>
+                        <td><strong>{{ "${:,.2f}".format(salary.net_salary or 0) }}</strong></td>
+                        <td>
+                            <span class="badge 
+                                {% if salary.payment_status == 'paid' %}badge-success
+                                {% elif salary.payment_status == 'pending' %}badge-warning
+                                {% else %}badge-secondary{% endif %}">
+                                {{ salary.payment_status|title }}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ url_for('views.view_salary', id=salary.id) }}" class="btn btn-sm btn-info" data-toggle="tooltip" title="View Details">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                {% if salary.payment_status == 'pending' %}
+                                <a href="{{ url_for('views.mark_paid', id=salary.id) }}" class="btn btn-sm btn-success" data-toggle="tooltip" title="Mark as Paid">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Filter Modal -->
+<div class="modal fade" id="salaryFilterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form method="GET" action="{{ url_for('views.salary_filter') }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Filter Salaries</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-control" name="month" id="month">
+                        {% for m in range(1, 13) %}
+                             <option value="{{ m }}" {% if m == current_month %}selected{% endif %}>{{ m }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <input type="number" class="form-control" name="year" id="year" value="{{ current_year }}">
+                    <!-- <div class="form-group">
+                        <label for="month">Month</label>
+                        <select class="form-control" name="month" id="month">
+                            {% for m in range(1, 13) %}
+                            <option value="{{ m }}">{{ m }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="number" class="form-control" name="year" id="year" value="{{ current_year }}">
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

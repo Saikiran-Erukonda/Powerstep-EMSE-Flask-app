@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1> {{ user.bname }}</h1>
+<div class="container mt-4">
+  <h4>Employees</h4>
+  <ul class="list-group list-group-flush" id="Employee">
+    {% for employee in user.employees %}
+      <li class="list-group-item">
+        {{ employee.emp_name }} – {{ employee.position }} – {{ employee.phonenumber }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Button to trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#employeeModal">
+  Add Employee
+  </button>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role ="document">
+      <form method="POST" action="/add-employee">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="employeeModalLabel">Add New Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="emp_name" class="form-label">Employee Name</label>
+              <input type="text" class="form-control" id="emp_name" name="emp_name" placeholder= "Enter Employee name" required>
+            </div>
+            <div class="mb-3">
+              <label for="position" class="form-label">Position</label>
+              <input type="text" class="form-control" id="position" name="position" placeholder= "Your Role"required>
+            </div>
+            <div class="mb-3">
+              <label for="phonenumber" class="form-label">Phone Number</label>
+              <input type="integer" class="form-control" id="phonenumber" name="phonenumber" placeholder= "Enter Employee phone number" required>
+            </div>
+            <div class="mb-3">
+              <label for="payment_details" class="form-label">Payment Details</label>
+              <input type="text" class="form-control" id="payment_details" name="payment_details" placeholder= "Enter UPI ID" required>
+            </div>
+            <div class="mb-3">
+              <label for="base_salary" class="form-label">Base Salary</label>
+              <input type="integer" class="form-control" id="base_salary" name="base_salary" placeholder= "Enter Monthly Salary" required>
+            </div>
+            <div class="mb-3">
+              <label for="join_date" class="form-label">Date of Joining</label>
+              <input type="date" class="form-control" id="join_date" name="join_date" placeholder= "Enter Date of Joining" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <br/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
