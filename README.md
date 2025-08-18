@@ -58,7 +58,7 @@ graph
     B --> F[Login]
     A --> D[Salary]
     D --> I[All Employee salaries]
-    D --> J[View Employee Salary and Pay] 
+    D --> J[View Emp Salary & Pay] 
 ```
 
 
