@@ -63,7 +63,7 @@ graph
  
 ---------------------------------------------------------------------
 
-## Core Files & their purpose
+## Py Files & their purpose
 
 | File | Purpose | Key Responsibilities |
 |------|---------|----------------------|
